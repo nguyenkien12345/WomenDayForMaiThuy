@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mai Thị Thanh Thúy</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('Thuy5.jpg');
+        background-size: cover; /* Tự căn chỉnh sao cho vừa không bị bể ảnh */
+        background-position: center;
+    }
+
+    h1 {
+        font-size: xx-large;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .snow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        background-image: url(rose-flower-petal-icon.png);
+        background-size: cover /* Tự căn chỉnh sao cho vừa không bị bể ảnh */;
+        animation: snowing 5s ease-in-out infinite;
+    }
+
+    @keyframes snowing {
+        0% {
+            transform: translate(0, 0);
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            transform: translate(100px, 50vh);
+            opacity: 0;
+        }
+    }
+
+    /*prevent scolling*/
+    .stop-scrolling {
+        height: 100%;
+        overflow: hidden;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Chúc bạn Thúy 8/3 vui vẻ ạ</h1>
+        <div class="snow"></div>
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        const count = 100; // Số bông tuyết chúng ta muốn xuất hiện
+        for(let i = 0; i < count; i++) {
+            let leftSnow = Math.floor(Math.random() * container.clientWidth); // Thay đổi vị trí left mỗi lần random
+            let topSnow = Math.floor(Math.random() * container.clientHeight); // Thay đổi vị trí top mỗi lần random
+            let widthHeightOfSnow = Math.floor(Math.random() * 50);           // Vì ta đang để chiều rộng và chiều cao của bông tuyết là hình vuông (random từ 0 đến 50)
+            let timeSnow = Math.floor((Math.random() * 5) + 5);               // random từ (5 đến 10)
+            /* Mỗi lần như vậy tạo ra 1 thẻ div với class snow mới */
+            let div = document.createElement('div');
+            div.classList.add('snow');
+            /* Gắn thuộc tính css cho thẻ div */
+            div.style.left = leftSnow + 'px';
+            div.style.top = topSnow + 'px';
+            div.style.width = widthHeightOfSnow + 'px';
+            div.style.height = widthHeightOfSnow + 'px';
+            div.style.animationDuration = timeSnow + 's';
+            container.appendChild(div);
+        }
+
+        document.body.classList.add('stop-scrolling');
+
+        document.body.addEventListener('touchmove', function(e){
+            e.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
